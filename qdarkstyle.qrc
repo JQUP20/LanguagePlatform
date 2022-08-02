@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/"/>
+    <qresource prefix="/qdarkstyle">
+        <file>style.qss</file>
+    </qresource>
+</RCC>

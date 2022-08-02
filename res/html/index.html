@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+
+
+    <script type="text/javascript" src="wangEditor.min.js"></script>
+
+
+</head>
+
+<body>
+
+    <div>
+        <div id="div1">
+            <p></p>
+        </div>
+    </div>
+
+
+</body>
+<style>
+	* {
+		font-family:"Microsoft Yahei";
+	}
+	
+    .w-e-text{
+        overflow-y: auto;
+        background-color: #fff
+        height: 200px;
+        padding: 10px;
+    }
+	.w-e-text::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+		scrollbar-arrow-color:red;
+		cursor: pointer;
+
+	}
+	.w-e-text::-webkit-scrollbar-thumb {
+		border-radius: 5px;
+		-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+		background: rgba(0,0,0,0.2);
+		scrollbar-arrow-color:red;
+		cursor: pointer;
+	}
+	.w-e-text::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+		border-radius: 0;
+		background: rgba(0,0,0,0.1);
+		cursor: pointer;
+	}
+	
+	.w-e-text-container .placeholder {
+		top: 20px;
+	}
+</style>
+
+<script src="qwebchannel.js"></script> 
+<script type="text/javascript">
+    const E = window.wangEditor;
+    console.log(E, document.getElementById('div1'));
+    const editor = new E(document.getElementById('div1'))
+
+    editor.config.showFullScreen = false
+    
+    editor.config.height = 500
+    console.log(editor);
+    editor.create();
+    editor.fullScreen() // 全屏
+
+    function setHtml(xx) {
+		const ss = window.decodeURIComponent(window.atob(xx))
+		console.log(ss);
+        editor.txt.html(ss); // 重新设置编辑器内容
+    }
+	
+    function getHtml() {
+		 const ss = window.btoa(window.encodeURIComponent(editor.txt.html()));
+		 console.log(ss, editor.txt.html());
+		 
+        new QWebChannel(qt.webChannelTransport, function (channel) {
+			var qtui = channel.objects.qtui;
+			qtui.recieveJsMessage(ss, editor.txt.html());
+		});
+    }
+</script>
+
+<style>
+    #box {
+        margin-top: 20px;
+        border: 1px solid skyblue;
+    }
+
+    /* table 样式 */
+    table {
+        border-top: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+    }
+
+    table td,
+    table th {
+        border-bottom: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+        padding: 3px 5px;
+    }
+
+    table th {
+        border-bottom: 2px solid #ccc;
+        text-align: center;
+    }
+
+    /* blockquote 样式 */
+    blockquote {
+        display: block;
+        border-left: 8px solid #d0e5f2;
+        padding: 5px 10px;
+        margin: 10px 0;
+        line-height: 1.4;
+        font-size: 100%;
+        background-color: #f1f1f1;
+    }
+
+    /* code 样式 */
+    code {
+        display: inline-block;
+        *display: inline;
+        *zoom: 1;
+        background-color: #f1f1f1;
+        border-radius: 3px;
+        padding: 3px 5px;
+        margin: 0 3px;
+    }
+
+    pre code {
+        display: block;
+    }
+
+    /* ul ol 样式 */
+    ul,
+    ol {
+        margin: 10px 0 10px 20px;
+    }
+</style>
+
+</html>
